@@ -1,0 +1,38 @@
+#redirect a {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#logo {
+    width: 70px;
+    height: auto;
+}
+
+#Adsearch div {
+    padding: 10px;
+}
+
+#Adsearch input[type=text] {
+    width: 70%;
+}
+
+
+
+
+#submit input {
+    background-color: rgb(115, 115, 213);
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+
+}
+
+
+#submit {
+    display: flex;
+    justify-content: flex-end;
+    width: 1000px;
+}
+
+/* #submit input */
