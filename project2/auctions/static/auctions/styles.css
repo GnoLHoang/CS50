@@ -1,0 +1,66 @@
+body {
+    padding: 10px;
+}
+
+
+#cardImage {
+    position: relative;
+    display: flex;
+    height: 180px;
+    width: 286px;
+}
+
+
+.card {
+    display: inline-block;
+    margin: 10px;
+}
+
+
+#detailImage {
+    display: flex;
+    max-width: 30%; 
+    object-fit: contain;
+}
+
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.text {
+    position: absolute;
+    top: 0px;
+    right: 10%;  
+}
+
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-danger, .btn-success {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+}
+
+.badge {
+    background-color: gray;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+
+.comment-box {
+    width: 1000px;
+    height: 400px; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    overflow: auto;
+}
+
+
+
