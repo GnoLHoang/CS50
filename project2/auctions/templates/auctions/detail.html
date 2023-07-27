@@ -1,0 +1,96 @@
+{% extends "auctions/layout.html" %}
+
+{% block body%}
+    <h2>Product's id: {{listing.id}}</h2>
+    {% if listing.isActive == True %}
+        <div class="container">
+            <img id="detailImage" src="{{listing.image}}" alt="{{listing.title}}">
+            {% if user.is_authenticated %}
+                {% if inWatchlist == True %}
+                    <form action="{% url "removeFrom" listing.id%}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">Remove from watchlist</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'addTo' listing.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-success">Add to watchlist</button>
+                    </form>
+                {% endif %}
+
+                
+            {% endif %}
+            <div class="text">
+                <h1>{{listing.title}}: ${{listing.price}}</h1>
+                <ul>
+                    <li><strong>Description: {{listing.description}}</strong></li>
+                    <li><strong>Owner: {{listing.owner}}</strong></li>
+                    <li><strong>Current Price: ${{listing.price}}</strong></li>
+                    {% if request.user == listing.owner%}
+                        <li>
+                            <div class="button">
+                                <form action="{% url "close" listing.id %}">
+                                    <button class="btn btn-danger">Close Listing</button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            
+        </div>
+        <br>
+        <br>
+
+        <div class="bid">
+
+            <form action="{% url 'bid' listing.id %}" method="POST">
+                {% csrf_token %}
+                <input type="number" name="bidSubmit" placeholder="Greater than the current bid">
+                <button type="submit">Enter your bid</button>
+
+            </form>
+            <br>
+            <br>
+            <h3>Bids' information</h3>
+            <ul>
+                <li>Bid amount: {{amount}}</li>
+            </ul>
+        </div>
+
+        <div class="comment-box">
+            <h2>Comment Section</h2>
+            {% if user.is_authenticated %}
+                <div class="addComment">
+                    <form action="{% url 'comment' listing.id %}" method="POST">
+                        {% csrf_token %}    
+                        <input type="text" placeholder="Your thought about the product:... " name="content">
+                        <button class="btn btn-primary" type="submit">POST</button>
+                    </form>
+                </div>
+            {% endif %} 
+            <p class="comment">
+                <div class="comment-box">
+                    <ul>
+                        {% for comment in allComment %}
+                            <li><strong>{{comment.user}}</strong>: {{comment.content}}</li>
+                        {% empty %}
+                            <li><strong>No comments</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </p>
+        </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        The Listing is closed.
+    </div>
+    <div class="container">
+        <img id="detailImage" src="{{listing.image}}" alt="{{listing.title}}">
+    </div>
+
+
+
+    {% endif %}
+{% endblock %}
